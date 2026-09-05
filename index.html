@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Waiguru Drive — Michael Waiguru, web developer</title>
+<meta name="description" content="A portfolio you can drive around: a procedural low-poly 3D island where each building holds Michael Waiguru's work, skills and story. Or skip the game and read it all below.">
+<meta property="og:title" content="Waiguru Drive — a portfolio you can drive around">
+<meta property="og:description" content="Take the car around a low-poly island. Park at the Studio for the work, the Workshop for the skills, the Library for the story.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#8fd3ff">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%238fd3ff'/%3E%3Crect x='6' y='14' width='20' height='9' rx='2' fill='%23ff6b57'/%3E%3Crect x='10' y='9' width='12' height='6' rx='2' fill='%232a3a4a'/%3E%3Ccircle cx='11' cy='24' r='3' fill='%231f2428'/%3E%3Ccircle cx='21' cy='24' r='3' fill='%231f2428'/%3E%3C/svg%3E">
+<link rel="modulepreload" href="js/vendor/three.module.min.js">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#site">Skip the game, read the portfolio</a>
+
+<div id="stage">
+  <canvas id="gl" aria-label="Waiguru Drive, a small 3D island you drive around. Arrow keys or WASD to drive. The same content is written out below the game." role="img"></canvas>
+  <div class="nogl" id="nogl"><div class="card"><h1>Your browser can't run the 3D island</h1><p>WebGL is unavailable here. The whole portfolio is written out below.</p><a class="btn" href="#site">Read the portfolio</a></div></div>
+
+  <div class="hud">
+    <div class="hud-tl">
+      <details class="quest" id="quest" open>
+        <summary><span>Road trip</span><span id="qcount">0/6</span></summary>
+        <ul id="qlist">
+          <li data-q="work">Park at the Studio (work)</li>
+          <li data-q="skills">Park at the Workshop (skills)</li>
+          <li data-q="about">Park at the Library (about)</li>
+          <li data-q="board">Read the notice board</li>
+          <li data-q="contact">Reach the Post Office</li>
+          <li data-q="tokens">Collect all 10 coins</li>
+        </ul>
+      </details>
+    </div>
+    <div class="tr">
+      <span class="chip" id="tokens"><span class="coin"></span><span id="tokenCount">0/10</span></span>
+      <button class="chip" id="resetBtn" type="button">Reset car</button>
+      <button class="chip" id="themeBtn" type="button">Night</button>
+      <a class="chip" href="#site">Skip &#8595;</a>
+    </div>
+    <div class="bl"><div class="speedo"><b id="speed">0</b><small>km/h</small></div></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="touch"><div class="stick" id="stick"><div class="knob" id="knob"></div></div></div>
+  </div>
+
+  <div class="intro" id="intro">
+    <div class="card">
+      <p class="kicker">A portfolio you can drive around</p>
+      <h1>Welcome to <span>Waiguru Drive</span></h1>
+      <p>Michael Waiguru builds web products. Take the car for a spin: park on the glowing pad outside each building to open it. The Studio holds the work, the Workshop the skills, the Library the story. Ten coins are scattered around the island, and there are crates to knock over. Or skip all that, everything is written out below.</p>
+      <ul class="keys">
+        <li class="kb"><kbd>W A S D</kbd>/<kbd>&#8593; &#8592; &#8595; &#8594;</kbd> drive</li>
+        <li class="kb"><kbd>Esc</kbd> close a panel</li>
+        <li class="kb"><kbd>R</kbd> reset the car</li>
+        <li class="tc">Joystick: push up to drive, sideways to steer</li>
+      </ul>
+      <div class="row">
+        <button class="btn" id="startBtn" type="button">&#9654; Start driving</button>
+        <a class="btn alt" href="#site">Just show me the portfolio</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle">
+  <div class="box">
+    <header><h2 id="panelTitle">Studio</h2><button class="close" id="panelClose" type="button">Close (Esc)</button></header>
+    <div class="body" id="panelBody"></div>
+  </div>
+</div>
+
+<!-- ============ the plain portfolio: every in-game panel reads from here ============ -->
+<div id="site">
+  <div class="wrap">
+    <nav class="sitenav" aria-label="Site">
+      <a class="brand" href="#stage">&#9650; Waiguru Drive</a>
+      <ul>
+        <li><a href="#stage">Play</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section class="s" id="work" data-title="The Studio">
+      <div class="pb">
+        <p class="kicker">Selected work · 2024 – 2026</p>
+        <h2>Products I've shipped</h2>
+        <p class="lead">Three projects with the outcome first. I work end to end: <strong>discovery, design in the browser, build, launch, and the measuring after</strong>.</p>
+        <div class="grid2">
+          <article class="proj">
+            <canvas class="cover" data-cover="sanduku" width="320" height="180" aria-hidden="true"></canvas>
+            <h3>Sanduku</h3>
+            <p class="meta">Fintech · marketing site + onboarding · 2026 · Lead front-end</p>
+            <p>A savings app for chamas (group savings circles) needed sign-ups to finish on cheap Android phones over patchy data. I rebuilt the onboarding as a six-step flow that saves progress locally and resumes after a dropped connection.</p>
+            <dl><dt>Outcome</dt><dd>Sign-up completion 41% → 68% in the first month</dd><dt>Built</dt><dd>Next.js, WebGL hero, Stripe + M-Pesa hand-off, Playwright suite</dd><dt>Weight</dt><dd>First load 92 KB on 3G, Lighthouse 99</dd></dl>
+          </article>
+          <article class="proj">
+            <canvas class="cover" data-cover="baraza" width="320" height="180" aria-hidden="true"></canvas>
+            <h3>Baraza Health</h3>
+            <p class="meta">Telehealth · patient portal + design system · 2025 · Full-stack</p>
+            <p>Clinics were booking over WhatsApp and losing appointments. I built a patient portal with booking, reminders, and a 42-component design system the in-house team now ships with.</p>
+            <dl><dt>Outcome</dt><dd>No-shows down 31%, 4 clinics onboarded without me</dd><dt>Built</dt><dd>React, Node, Postgres, Africa's Talking SMS, Storybook</dd><dt>Access</dt><dd>WCAG 2.1 AA audited, keyboard-complete</dd></dl>
+          </article>
+          <article class="proj">
+            <canvas class="cover" data-cover="kilele" width="320" height="180" aria-hidden="true"></canvas>
+            <h3>Kilele Labs</h3>
+            <p class="meta">Climate data · interactive report + dashboard · 2024 · Front-end + dataviz</p>
+            <p>A research lab's annual report was a 90-page PDF nobody read. I turned it into a scroll-driven story with live charts and a dashboard that updates from their data pipeline.</p>
+            <dl><dt>Outcome</dt><dd>Median time on report 0:40 → 6:10, cited by two ministries</dd><dt>Built</dt><dd>SvelteKit, D3, Canvas charts, static export on Cloudflare</dd><dt>Scale</dt><dd>1.2M data points rendered under 16 ms per frame</dd></dl>
+          </article>
+          <article class="proj">
+            <div>
+              <p class="kicker">Side projects &amp; open source</p>
+              <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:15px;display:grid;gap:8px">
+                <li><strong style="color:var(--ink)">tiny-dither</strong>, 1.1 KB ordered-dithering shader for canvas and WebGL. 400+ stars.</li>
+                <li><strong style="color:var(--ink)">mpesa-sandbox</strong>, a local mock of the Daraja API so you can develop payments offline.</li>
+                <li><strong style="color:var(--ink)">this island</strong>, a procedural low-poly world in one file: terrain, water, trees and an arcade car, under 60 draw calls.</li>
+                <li><strong style="color:var(--ink)">Nairobi Frontend meetup</strong>, co-organiser since 2023, 14 talks and counting.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="s" id="skills" data-title="The Workshop">
+      <div class="pb">
+        <p class="kicker">Skills · honest levels</p>
+        <h2>What's on the bench</h2>
+        <p class="lead">Levels are what I'd say in an interview, not what a résumé says. <strong>Daily</strong> means I ship with it every week; <strong>Solid</strong> means I've shipped real products; <strong>Learning</strong> means ask me in six months.</p>
+        <div class="grid2">
+          <div>
+            <p class="kicker">Front-end</p>
+            <ul class="skills">
+              <li><span>TypeScript / JS</span><span class="bar"><i style="--v:95%"></i></span><span class="lv">DAILY</span></li>
+              <li><span>React / Next.js</span><span class="bar"><i style="--v:92%"></i></span><span class="lv">DAILY</span></li>
+              <li><span>CSS &amp; motion</span><span class="bar"><i style="--v:90%"></i></span><span class="lv">DAILY</span></li>
+              <li><span>Three.js / WebGL</span><span class="bar"><i style="--v:72%"></i></span><span class="lv">SOLID</span></li>
+              <li><span>Svelte</span><span class="bar"><i style="--v:65%"></i></span><span class="lv">SOLID</span></li>
+              <li><span>Accessibility</span><span class="bar"><i style="--v:80%"></i></span><span class="lv">SOLID</span></li>
+            </ul>
+          </div>
+          <div>
+            <p class="kicker">Back-end &amp; tooling</p>
+            <ul class="skills">
+              <li><span>Node / APIs</span><span class="bar"><i style="--v:80%"></i></span><span class="lv">SOLID</span></li>
+              <li><span>Postgres</span><span class="bar"><i style="--v:70%"></i></span><span class="lv">SOLID</span></li>
+              <li><span>Payments (M-Pesa, Stripe)</span><span class="bar"><i style="--v:85%"></i></span><span class="lv">SOLID</span></li>
+              <li><span>Testing (Playwright)</span><span class="bar"><i style="--v:75%"></i></span><span class="lv">SOLID</span></li>
+              <li><span>Cloudflare / CI</span><span class="bar"><i style="--v:70%"></i></span><span class="lv">SOLID</span></li>
+              <li><span>Rust / WASM</span><span class="bar"><i style="--v:30%"></i></span><span class="lv">LEARNING</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="grid3" style="margin-top:28px">
+          <div><span class="stat">7 yrs<small>building for the web, 4 of them freelance</small></span></div>
+          <div><span class="stat">23<small>products shipped to real users</small></span></div>
+          <div><span class="stat">98<small>median Lighthouse performance across launches</small></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s" id="about" data-title="The Library">
+      <div class="pb">
+        <p class="kicker">About · the story so far</p>
+        <h2>Hi, I'm Michael</h2>
+        <p class="lead">I'm a web developer in Nairobi. I got into this by fixing a hardware shop's website in 2016 and never really stopped. <strong>I like products that feel good in the hand</strong>, fast, tactile, honest about what they do, and I care about them working on the phones people actually own.</p>
+        <div class="grid2">
+          <ol class="tl">
+            <li><span class="when">2026</span><h4>Independent, product-focused</h4><p>Working with two or three founders at a time on launches. Started the WebGL and motion work that this island and its sibling designs came out of.</p></li>
+            <li><span class="when">2024 – 2025</span><h4>Front-end lead, Baraza Health (contract)</h4><p>Design system, patient portal, accessibility audit. Grew the front-end team from one to three.</p></li>
+            <li><span class="when">2022 – 2024</span><h4>Full-stack developer, agency in Nairobi</h4><p>Shipped 14 sites and two web apps for clients across East Africa. Learned to estimate honestly and to say no to a fourth carousel.</p></li>
+            <li><span class="when">2019 – 2022</span><h4>BSc Computer Science + freelance</h4><p>Built for local businesses while studying. First paid WebGL job was a 3D product spinner for a furniture maker.</p></li>
+            <li><span class="when">2016</span><h4>The hardware shop website</h4><p>My uncle's shop. Table-based layout, one broken image, and the moment I decided this was the job.</p></li>
+          </ol>
+          <div>
+            <p class="kicker">How I work</p>
+            <ul style="margin:0 0 22px;padding-left:18px;color:var(--muted);display:grid;gap:8px;font-size:15.5px">
+              <li><strong style="color:var(--ink)">Design in the browser.</strong> Real sizes, real content, real devices, from week one.</li>
+              <li><strong style="color:var(--ink)">A frame budget on day one.</strong> 16 ms on a mid-range Android, measured, not assumed.</li>
+              <li><strong style="color:var(--ink)">Small releases.</strong> Weekly, behind flags when it's risky, with a number attached to each one.</li>
+              <li><strong style="color:var(--ink)">Write it down.</strong> Decisions, trade-offs and the "why" live in the repo, not in my head.</li>
+            </ul>
+            <p class="kicker">Right now</p>
+            <ul style="margin:0;padding-left:18px;color:var(--muted);display:grid;gap:6px;font-size:15.5px">
+              <li>Learning Rust well enough to ship a WASM image tool</li>
+              <li>Reading <em>Refactoring UI</em> for the third time</li>
+              <li>Training for the Nairobi half marathon (slowly)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s" id="board" data-title="Notice board">
+      <div class="pb">
+        <p class="kicker">Kind words</p>
+        <h2>What clients say</h2>
+        <div class="quotes">
+          <figure><blockquote>“He made our onboarding feel like a product people wanted to finish. Sign-up completion went from 41% to 68%.”</blockquote><figcaption>Amina O. · Co-founder, Sanduku</figcaption></figure>
+          <figure><blockquote>“The design system meant our own team could ship new screens without calling him. That's the mark of a good contractor.”</blockquote><figcaption>Dr. Wanjiru K. · Baraza Health</figcaption></figure>
+          <figure><blockquote>“Our report finally got read. Michael turned 90 pages into something ministers scrolled through on their phones.”</blockquote><figcaption>Prof. Otieno · Kilele Labs</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="s" id="fun" data-title="The Garage">
+      <div class="pb">
+        <p class="kicker">Off the clock</p>
+        <h2>Ten things the coins will tell you</h2>
+        <ol class="facts" id="factList">
+          <li>First website: 2016, my uncle's hardware shop. It had a hit counter.</li>
+          <li>I type 96 words a minute and still make the same typo in "definitely".</li>
+          <li>Daily driver is Linux; I keep a Windows partition purely for testing Edge.</li>
+          <li>Tea, not coffee. Kenyan black, no sugar, don't ask.</li>
+          <li>I've spoken at 14 meetups and was nervous at every single one.</li>
+          <li>Favourite bug: a checkout that failed only on Tuesdays, because of a cron job.</li>
+          <li>Every project I ship gets a 60 fps budget on a 2019 Android phone.</li>
+          <li>This island is generated from a noise function. No 3D files were harmed.</li>
+          <li>Slow half-marathon runner, fast at spotting a missing focus state.</li>
+          <li>The car has no physics engine. It is 40 lines of arithmetic and a lot of tuning.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="s" id="contact" data-title="The Post Office">
+      <div class="pb">
+        <p class="kicker">Contact · booking Q4 2026</p>
+        <h2>Send a message</h2>
+        <p class="lead">One email is enough. Tell me <strong>what you're building, when you need it, and roughly what budget you have in mind</strong>. I reply within a day, usually the same one.</p>
+        <a class="mail" href="mailto:hello@michaelwaiguru.com">hello@michaelwaiguru.com</a>
+        <ul class="contact-list">
+          <li><span class="d">GitHub</span><a href="https://github.com/michaelkariuki" rel="noopener">github.com/michaelkariuki</a></li>
+          <li><span class="d">LinkedIn</span><a href="#">Michael Waiguru</a></li>
+          <li><span class="d">CV</span><a href="#">Download as PDF</a></li>
+          <li><span class="d">Timezone</span>Nairobi, GMT+3. Overlaps with Europe all day and the US East Coast mornings.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="f">
+      <span>© 2026 Michael Waiguru</span>
+      <span>Procedural low-poly island · Three.js · one file · no tracking</span>
+    </footer>
+  </div>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
