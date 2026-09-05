@@ -36,11 +36,13 @@
     </div>
     <div class="tr">
       <span class="chip" id="tokens"><span class="coin"></span><span id="tokenCount">0/10</span></span>
+      <button class="chip" id="soundBtn" type="button">Sound: off</button>
       <button class="chip" id="resetBtn" type="button">Reset car</button>
       <button class="chip" id="themeBtn" type="button">Night</button>
       <a class="chip" href="#site">Skip &#8595;</a>
     </div>
     <div class="bl"><div class="speedo"><b id="speed">0</b><small>km/h</small></div></div>
+    <div class="br"><canvas id="map" class="minimap" width="256" height="256" aria-hidden="true"></canvas></div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <div class="touch"><div class="stick" id="stick"><div class="knob" id="knob"></div></div></div>
   </div>
@@ -49,9 +51,10 @@
     <div class="card">
       <p class="kicker">A portfolio you can drive around</p>
       <h1>Welcome to <span>Waiguru Drive</span></h1>
-      <p>Michael Waiguru builds web products. Take the car for a spin: park on the glowing pad outside each building to open it. The Studio holds the work, the Workshop the skills, the Library the story. Ten coins are scattered around the island, and there are crates to knock over. Or skip all that, everything is written out below.</p>
+      <p>Michael Waiguru builds web products. Take the car for a spin: park on the glowing pad outside each building to open it. The Studio holds the work, the Workshop the skills, the Library the story. Ten coins are scattered around, there's a ramp on the road north with crates behind it, and a mountain worth climbing. Or skip all that, everything is written out below.</p>
       <ul class="keys">
         <li class="kb"><kbd>W A S D</kbd>/<kbd>&#8593; &#8592; &#8595; &#8594;</kbd> drive</li>
+        <li class="kb"><kbd>Space</kbd> handbrake, for drifting</li>
         <li class="kb"><kbd>Esc</kbd> close a panel</li>
         <li class="kb"><kbd>R</kbd> reset the car</li>
         <li class="tc">Joystick: push up to drive, sideways to steer</li>

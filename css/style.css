@@ -44,6 +44,8 @@ button{font:inherit}
 .hud .hud-tl{position:absolute;top:14px;left:14px;display:flex;flex-direction:column;gap:8px;max-width:min(300px,72vw)}
 .hud .tr{position:absolute;top:14px;right:14px;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .hud .bl{position:absolute;left:18px;bottom:max(18px,env(safe-area-inset-bottom));display:flex;gap:10px;align-items:flex-end}
+.hud .br{position:absolute;right:18px;bottom:max(18px,env(safe-area-inset-bottom))}
+.minimap{width:128px;height:128px;border-radius:50%;box-shadow:0 4px 14px rgba(20,40,60,.25),0 0 0 3px rgba(255,255,255,.85);display:block;background:#3aa4ea}
 .chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.88);color:#1d2b33;border:0;padding:8px 12px;font-family:var(--display);font-weight:600;font-size:14px;line-height:1;
   border-radius:999px;box-shadow:0 4px 14px rgba(20,40,60,.18);cursor:pointer;text-decoration:none;backdrop-filter:blur(8px)}
 .chip:hover{background:#fff}
@@ -81,7 +83,7 @@ button{font:inherit}
 .touch{position:absolute;inset:0;display:none;pointer-events:none}
 .stick{position:absolute;left:22px;bottom:max(90px,calc(env(safe-area-inset-bottom) + 72px));width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.45);pointer-events:auto}
 .stick .knob{position:absolute;left:50%;top:50%;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:rgba(255,255,255,.85);box-shadow:0 3px 8px rgba(0,0,0,.25)}
-@media (pointer: coarse){ .touch{display:block} .keys .kb{display:none} .keys .tc{display:list-item} .hud .bl{left:auto;right:18px} }
+@media (pointer: coarse){ .touch{display:block} .keys .kb{display:none} .keys .tc{display:list-item} .hud .bl{left:auto;right:18px;bottom:max(160px,calc(env(safe-area-inset-bottom) + 142px))} .minimap{width:96px;height:96px} }
 .nogl{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:var(--bg);padding:20px;z-index:5}
 .nogl.show{display:flex}
 
